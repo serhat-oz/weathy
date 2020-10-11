@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -14,6 +16,15 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     buildTypes {
@@ -33,5 +44,24 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Navigation component
+    implementation "android.arch.navigation:navigation-fragment:$rootProject.nav_version"
+    implementation "android.arch.navigation:navigation-ui:$rootProject.nav_version"
+    implementation "android.arch.navigation:navigation-runtime-ktx:$rootProject.nav_version"
+    implementation "android.arch.work:work-runtime-ktx:$rootProject.workVersion"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.logging_version"
+
+
+    // Databinding compiler
+    kapt "com.android.databinding:compiler:$rootProject.binding_compiler_version"
+
+    // Lifecycle components
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    kapt "android.arch.lifecycle:compiler:$lifecycle_version"
 
 }
