@@ -74,6 +74,7 @@
                         android:gravity="center"
                         android:inputType="text"
                         android:maxLines="1"
+                        android:text="@={viewmodel.obsSearchKey}"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp"
                         android:layout_marginRight="10dp" />
@@ -84,6 +85,7 @@
                         android:layout_height="45dp"
                         android:layout_marginBottom="5dp"
                         android:layout_weight="1"
+                        android:onClick="@{() -> viewmodel.fetchSearchResults()}"
                         android:background="@drawable/custom_edittext_border"
                         android:text="@string/btn_submit" />
                 </LinearLayout>
@@ -92,7 +94,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSearchResult"
                 android:layout_width="match_parent"
-                android:visibility="gone"
+                android:visibility="@{safeUnbox(viewmodel.empty) ? View.GONE : View.VISIBLE}"
                 android:layout_height="match_parent" />
         </LinearLayout>
         <ProgressBar
@@ -100,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:visibility="gone"
+            android:visibility="@{safeUnbox(viewmodel.dataLoading) ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

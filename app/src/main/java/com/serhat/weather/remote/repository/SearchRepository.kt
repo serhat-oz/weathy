@@ -11,19 +11,23 @@ class SearchRepository {
 
     fun getSearchResultValues(
         username: String,
-        onResult: (isSuccess: Boolean, response: List<SearchRepository>?) -> Unit
+        onResult: (isSuccess: Boolean, response: SearchResult?) -> Unit
     ) {
         RequestFactory.instance.getAutoCompletePlace(username)
             .enqueue(object : Callback<SearchResult> {
                 override fun onFailure(call: Call<SearchResult>, t: Throwable) {
-                    Log.d("testfailure",t.toString())
+                    onResult(false, null)
                 }
 
                 override fun onResponse(
                     call: Call<SearchResult>,
                     response: Response<SearchResult>
                 ) {
-                    Log.d("testfailure",response.toString())
+                    if (response.code() == 200) {
+                        onResult(true, response.body())
+                    } else {
+                        onResult(false, response.body())
+                    }
                 }
 
             })
