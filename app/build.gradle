@@ -72,5 +72,7 @@ dependencies {
     // Picasso
     implementation "com.squareup.picasso:picasso:$rootProject.picasso_version"
 
+    //Location
+    implementation "com.google.android.gms:play-services-location:$rootProject.location_version"
 
 }
