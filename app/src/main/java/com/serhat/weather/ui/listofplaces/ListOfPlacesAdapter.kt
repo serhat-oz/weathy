@@ -1,8 +1,10 @@
 package com.serhat.weather.ui.listofplaces
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +12,8 @@ import com.serhat.weather.R
 import com.serhat.weather.BR
 import com.serhat.weather.databinding.SearchResultRowItemBinding
 import com.serhat.weather.model.searchresults.SearchResultItem
+import com.serhat.weather.remote.repository.ForecastsRepository
+import com.serhat.weather.remote.repository.SearchRepository
 
 
 class ListOfPlacesAdapter(private val listOfPlacesViewModel: ListOfPlacesViewModel) : RecyclerView.Adapter<ListOfPlacesViewHolder>() {
@@ -45,7 +49,16 @@ class ListOfPlacesViewHolder constructor(private val dataBinding: ViewDataBindin
 
         itemView.setOnClickListener {
             val bundle = Bundle()
-
+            listOfPlacesViewModel.dataLoading.value = true
+            ForecastsRepository.getInstance().getForecastDatas(itemData.Key) { isSuccess, response ->
+                listOfPlacesViewModel.dataLoading.value = false
+                if (isSuccess) {
+                    bundle.putSerializable("forecasts", response)
+                    itemView.findNavController().navigate(R.id.action_city_list_to_weather_detail_fragment, bundle)
+                } else {
+                    listOfPlacesViewModel.toastMessage.value = "not found"
+                }
+            }
         }
     }
 }

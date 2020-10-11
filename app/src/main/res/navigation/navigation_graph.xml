@@ -15,4 +15,14 @@
             app:destination="@+id/fragment_weather_detail" />
     </fragment>
 
+    <fragment
+        android:id="@+id/fragment_weather_detail"
+        android:name="com.serhat.weather.ui.forecastdetail.ForecastsDetailFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_forecasts_detail">
+
+        <argument
+            android:name="forecasts"
+            app:argType="com.serhat.weather.model.dailyforecasts.Forecasts" />
+    </fragment>
 </navigation>

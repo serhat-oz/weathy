@@ -31,7 +31,7 @@ object RequestFactory {
         val interceptor = Interceptor { chain ->
             val request = chain.request().newBuilder()
             val originalHttpUrl = chain.request().url
-            val url = originalHttpUrl.newBuilder().addQueryParameter("apikey", API_KEY).build()
+            val url = originalHttpUrl.newBuilder().addQueryParameter("apikey", "RiiKmphDhDK3a2c3kuMenE79liWEA4gu").build()
             request.url(url)
             chain.proceed(request.build())
         }

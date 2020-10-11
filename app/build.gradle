@@ -69,4 +69,8 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
     kapt "android.arch.lifecycle:compiler:$lifecycle_version"
 
+    // Picasso
+    implementation "com.squareup.picasso:picasso:$rootProject.picasso_version"
+
+
 }

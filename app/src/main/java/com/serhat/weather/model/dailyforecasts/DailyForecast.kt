@@ -1,5 +1,7 @@
 package com.serhat.weather.model.dailyforecasts
 
+import java.io.Serializable
+
 data class DailyForecast(
     val Date: String,
     val Day: Day,
@@ -9,4 +11,4 @@ data class DailyForecast(
     val Night: Night,
     val Sources: List<String>,
     val Temperature: Temperature
-)
+):Serializable
